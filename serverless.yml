@@ -50,7 +50,7 @@ custom:
       prod: 'This is prod'
       dev: 'This is dev'
   serverless-offline:
-    port: 4002
+    port: 4000
     host: 0.0.0.0
   cache:
     maxAgeInSeconds:
