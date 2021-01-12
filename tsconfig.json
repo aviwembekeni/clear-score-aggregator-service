@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["es2019"],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "target": "es2019",
+    "rootDir": "src",
+    "outDir": "lib",
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["jest"],
+    "strict": true
+  },
+  "include": ["src/**/*.ts"],
+}

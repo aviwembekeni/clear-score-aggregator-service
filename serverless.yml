@@ -1,0 +1,128 @@
+service:
+  name: clear-score-aggregator-service
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-domain-manager
+  - serverless-plugin-tracing
+  - serverless-plugin-git-variables
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: clear-score
+  stage: local
+  region: eu-west-1
+  timeout: 15
+  tracing: true
+  minimumCompressionSize: 1024
+  environment:
+    SERVICE_NAME: ${self:service}
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 #https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md#24630
+    NODE_ENV: ${self:custom.stage}
+    CORS_ORIGIN: ${self:custom.cors-origin.${self:custom.stage}}
+    STAGE: ${self:custom.stage}
+    LOGGER_LEVEL: debug
+    IOS_MINIMUM_VERSION: '2.0.0'
+    ANDROID_MINIMUM_VERSION: '2.0.0'
+    SLOW_QUERY_THRESHOLD: ${self:custom.slowQueryThreshold.${self:custom.stage}}
+
+package:
+  exclude:
+    - .git/**
+    - .dockerignore
+    - docker-compose.yml
+    - Dockerfile
+    - Makefile
+    - cache/**
+    - src/resources/**
+
+custom:
+  useDatabase:
+    local: 'local'
+    dev: 'cloud'
+    prod: 'cloud'
+  shortname: aggregator
+  stage: ${opt:stage, self:provider.stage}
+  myEnvironment:
+    MESSAGE:
+      prod: 'This is prod'
+      dev: 'This is dev'
+  serverless-offline:
+    port: 4002
+    host: 0.0.0.0
+  cache:
+    maxAgeInSeconds:
+      local: 60
+      dev: 3600
+      prod: 600
+    maxIdleTimeInSeconds:
+      local: 180
+      dev: 86400
+      prod: 172800
+  cscards:
+    local: https://app.clearscore.com/api/global/backend-tech-test/v1/cards/
+  scorecards:
+    local:  https://app.clearscore.com/api/global/backend-tech-test/v2/creditcards
+  cors-origin:
+    local: http://localhost:3002
+  customDomain:
+    domainName: ${self:custom.shortname}.${self:custom.stage}.clear.score
+    certificateName: ${self:custom.shortname}.${self:custom.stage}.clear.score
+    stage: ${self:custom.stage}
+    basePath: ''
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+    packager: 'yarn'
+  gitDescription: ${git:repository} - ${git:branch} - ${git:tags}
+  numberOfProvisions:
+    local: 0
+    dev: 0
+    prod: 1
+  slowQueryThreshold:
+    local: 3000
+    dev: 3000
+    prod: 3000
+
+functions:
+  graphql:
+    description: ${self:custom.gitDescription}
+    handler: src/handler.graphqlHandler
+    events:
+      - http:
+          method: get
+          path: graphql
+      - http:
+          method: post
+          path: graphql
+          cors:
+            origins:
+              - ${self:custom.cors-origin.${self:custom.stage}}
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: true
+      - http:
+          method: get
+          path: /
+      - http:
+          method: post
+          path: /
+          cors:
+            origins:
+              - ${self:custom.cors-origin.${self:custom.stage}}
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: true
+    provisionedConcurrency: ${self:custom.numberOfProvisions.${self:custom.stage}}
