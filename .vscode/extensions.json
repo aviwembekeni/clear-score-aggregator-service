@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "ms-vsliveshare.vsliveshare",
+    "davidanson.vscode-markdownlint",
+    "esbenp.prettier-vscode",
+    "2gua.rainbow-brackets",
+    "vtrois.gitmoji-vscode",
+    "github.vscode-pull-request-github",
+    "apollographql.vscode-apollo"
+  ],
+  "unwantedRecommendations": []
+}

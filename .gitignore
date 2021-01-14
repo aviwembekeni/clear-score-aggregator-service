@@ -1,0 +1,36 @@
+# package directories
+**/node_modules
+**/jspm_packages
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Serverless directories
+**/.serverless
+
+# Webpack directories
+**/.webpack
+
+# aws
+**/.aws
+
+# Typescript
+**/.lib
+
+# Assets cache
+**/cache/*
+
+# Mac files
+**/.DS_Store
+
+# Firebase app secrets
+serviceAccountKey.json
+
+report.*.json
+src/graphql-schema.json
+
+# Error Logs (Including yarn)
+*error.log

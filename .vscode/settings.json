@@ -1,0 +1,40 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#8080ff",
+    "titleBar.inactiveBackground": "#8080ff99",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveForeground": "#15202b99",
+    "statusBar.background": "#8080ff",
+    "statusBarItem.hoverBackground": "#4d4dff",
+    "statusBar.foreground": "#15202b"
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.webpack": true,
+    "**/dynamodb-data": true,
+    "**/.aws": true,
+    "**/build": true,
+    ".serverless": true
+  },
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.trimAutoWhitespace": true,
+  "editor.formatOnPaste": true,
+  "eslint.packageManager": "yarn",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "eslint.alwaysShowStatus": true,
+  "breadcrumbs.enabled": true,
+  "editor.renderControlCharacters": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

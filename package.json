@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "STAGE=unit-test jest",
-    "lint": "eslint --max-warnings=0 ./src/**/*.ts "
+    "lint": "eslint --max-warnings=0 ./src/**/*.ts ",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "apollo-server": "^2.13.1",

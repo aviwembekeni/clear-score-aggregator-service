@@ -28,11 +28,12 @@ Try a simple query like:
 
 ```gql
 {
-  recommendedCreditCards(fullName: "John Smith", creditScore: 500) {
+  recommendedCreditCards(name: "John Smith", creditScore: 500, salary: 20000) {
     creditCards {
-      cardName
+      provider
+      name
       apr
-      eligibity
+      cardScore
     }
   }
 }
@@ -41,7 +42,7 @@ Try a simple query like:
 ## Contributors
 
 | [![Aviwe Ngqukumba][aviwembekeni_avatar]][aviwembekeni_homepage] |
-|             [Aviwe Ngqukumba][aviwembekeni_homepage]             |
+| [Aviwe Ngqukumba][aviwembekeni_homepage] |
 
 [aviwembekeni_homepage]: https://github.com/aviwembekeni
 [aviwembekeni_avatar]: https://github.com/aviwembekeni.png?size=150

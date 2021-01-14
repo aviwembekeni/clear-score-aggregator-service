@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  clear-score-aggregator-service:
+    build:
+      context: ./
+      args:
+        PROJECT: ${PROJECT}
+    ports:
+      - '4000:4000'
+    volumes:
+      - './.aws:/root/.aws'
+      - '.:/${PROJECT}'
+      - '/${PROJECT}/node_modules'
+    environment:
+      - AWS_PROFILE=clear-score
+    entrypoint: top
+    networks:
+      - local
+      - clear-score
+    logging:
+      driver: none
+networks:
+  local:
+  clear-score:
+    name: clear-score
+    external: true
