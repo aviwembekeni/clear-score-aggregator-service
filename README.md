@@ -41,7 +41,6 @@ Try a simple query like:
 ## Contributors
 
 | [![Aviwe Ngqukumba][aviwembekeni_avatar]][aviwembekeni_homepage] |
-| :----------------------------------------------: | :----------------------------------------------------------: | :--------------------------------------------------------------: | :------------------------------------------------------: |
 |             [Aviwe Ngqukumba][aviwembekeni_homepage]             |
 
 [aviwembekeni_homepage]: https://github.com/aviwembekeni
