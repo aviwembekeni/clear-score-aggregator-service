@@ -65,6 +65,10 @@ build: set-credentials down
 	@echo "Building containers..."
 	@docker-compose build
 
+create-docker-network: set-credentials
+	@echo "Creating docker network..."
+	@docker network create clear-score
+
 yarn: docker-check
 		@echo "Doing base yarn install"
 		@yarn
