@@ -5,7 +5,7 @@ import { gql } from 'apollo-server-lambda';
 const typeDefs: DocumentNode = gql`
   directive @isAuthUser on FIELD_DEFINITION | OBJECT
 
-input recommndedCreditCardsInput {
+input recommendedCreditCardsInput {
     name: String!
     creditScore: Number!
     salary: Number!

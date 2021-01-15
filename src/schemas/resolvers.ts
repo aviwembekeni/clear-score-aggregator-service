@@ -1,29 +1,21 @@
-import {
-  QueryRecommendedCreditCardsArgs,
-  ResommendedCrediCardsQueryResponse,
-} from '../shared/types/appia-service-types';
+import RecommendedCreditCardsInput from '../models/RecommendedCreditCardsInput.model';
+import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResponse.model';
+import CreditCardServices from '../services/CreditCardServices';
 
 export default {
   Query: {
-    async asset(_obj: unknown, args: QueryRecommendedCreditCardsArgs, context: any): Promise<ResommendedCrediCardsQueryResponse> {
-      const { id } = args;
-      const { logger, assetLoader } = context;
-      const response: ResommendedCrediCardsQueryResponse = {
-        status: 'success',
-        timestamp: new Date().toISOString(),
-        errors: [],
-      };
-
+    async queryCreditCardRecommended(
+      _obj: unknown,
+      args: RecommendedCreditCardsInput,
+      _context: any,
+    ): Promise<RecommendedCreditCardsResponse> {
+      const creditCardService = new CreditCardServices();
       try {
-        logger.debug(`Resolving getAsset for id: ${id}`);
-        const foundAsset = await assetLoader.load(id);
-        response.asset = foundAsset;
-        return response;
+        console.debug(`Resolving queryCreditCardRecommended for user: ${args.name}`);
+        const recommendedCreditCards = await creditCardService.getRecommendedCreditCards(args);
+        return recommendedCreditCards;
       } catch (e) {
-        logger.error(`Resolver: Exception at asset: `, e);
-        response.status = 'error';
-        response.errors.push({ message: e });
-        return response;
+        throw new Error(`An error occured while querying recommnded credit cards. ${e}`)
       }
     },
   },
