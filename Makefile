@@ -10,23 +10,7 @@ project := $(shell basename `pwd`)
 workspace := "$(env)"
 container := $(project)
 docker-filecheck := /.dockerenv
-backend := ../backend.tfvars
 docker-warning := ""
-env-resources := ""
-
-# Buiild up Terraform argument variables
-terraform-backend-vars := -var-file=$(backend)
-terraform-backend-config := -backend-config=$(backend)
-ifeq ($(env), global)
-	env-resources := ./resources/global
-else
-	env-resources := ./resources/env
-endif
-terraform-env-vars := -var-file=$(env).tfvars
-
-s3-url-raw := s3://$(env)-clear-score-aggregator-service/
-replace-prod-string := prod.
-s3-url := $(subst $(replace-prod-string),,$(s3-url-raw))
 
 # Docker Warning
 ifeq ("$(wildcard $(docker-filecheck))","")
@@ -81,33 +65,25 @@ build: set-credentials down
 	@echo "Building containers..."
 	@docker-compose build
 
-generate: docker-check
-	@echo "(RE)Generating Typedefs..."
-	yarn generate
-
-yarn:
-	@echo "Doing base yarn install"
-	@yarn
+yarn: docker-check
+		@echo "Doing base yarn install"
+		@yarn
 
 run: yarn docker-check
 	@echo "Starting the  $(project) service..."
 	serverless offline --noTimeout --dontPrintOutput --watch --webpack-use-polling --stage local
 
-deploy: yarn lint test env-check docker-check
+deploy: env-check docker-check
 	@echo "Deplopying the  $(project) service..."
 	sls deploy --stage $(env) -v
 
-create_domain: yarn env-check docker-check
+create_domain: env-check docker-check
 	@echo "Creating the API Gateway Domain for Serverless..."
 	sls create_domain --stage $(env)
 
-test: yarn
+test: docker-check
 	@echo "Testing the  $(project) service..."
 	@yarn test
-
-lint: yarn
-	@echo "Checking Linting..."
-	@yarn lint
 
 docker-check:
 	$(call assert-file-exists,$(docker-filecheck), This step should only be run from Docker. Please run `make up` first.)
@@ -116,11 +92,11 @@ env-check:
 	$(call assert, env, No environment set. Supported environments are: [ dev | prod ]. Please set the env variable. e.g. `make env=dev plan`)
 
 docker-network-required:
-		@if [ ! "$$(docker network ls | grep clear-score)" ]; then \
-			echo "Creating Docker Network grep clear-score ..." ;\
-			docker network create grep clear-score ;\
+		@if [ ! "$$(docker network ls | grep inves-global)" ]; then \
+			echo "Creating Docker Network inves-global ..." ;\
+			docker network create inves-global ;\
 		else \
-			echo "Docker Network grep clear-score exists." ;\
+			echo "Docker Network inves-global exists." ;\
 		fi
 
 # Check that given variables are set and all have non-empty values,
