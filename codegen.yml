@@ -1,9 +1,8 @@
 generates:
   ./src/shared/types/clear-score-aggregator-service-types.ts:
-    schema: http://inves-service-appia:4002/graphql
+    schema: http://clear-score-aggregator-service:4000/graphql
     hooks:
-      afterOneFileWrite:
-        - prettier --write
+      : - prettier --write
     config:
       # defaultMapper: any
       skipTypename: true
