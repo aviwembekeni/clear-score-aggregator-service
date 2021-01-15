@@ -92,11 +92,11 @@ env-check:
 	$(call assert, env, No environment set. Supported environments are: [ dev | prod ]. Please set the env variable. e.g. `make env=dev plan`)
 
 docker-network-required:
-		@if [ ! "$$(docker network ls | grep inves-global)" ]; then \
-			echo "Creating Docker Network inves-global ..." ;\
-			docker network create inves-global ;\
+		@if [ ! "$$(docker network ls | grep clear-score)" ]; then \
+			echo "Creating Docker Network clear-score ..." ;\
+			docker network create clear-score ;\
 		else \
-			echo "Docker Network inves-global exists." ;\
+			echo "Docker Network clear-score exists." ;\
 		fi
 
 # Check that given variables are set and all have non-empty values,
