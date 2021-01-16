@@ -61,10 +61,6 @@ custom:
       local: 180
       dev: 86400
       prod: 172800
-  cscards:
-    local: https://app.clearscore.com/api/global/backend-tech-test/v1/cards/
-  scorecards:
-    local:  https://app.clearscore.com/api/global/backend-tech-test/v2/creditcards
   cors-origin:
     local: http://localhost:3002
   customDomain:
