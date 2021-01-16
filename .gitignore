@@ -19,6 +19,7 @@
 
 # Typescript
 **/.lib
+**/lib
 
 # Assets cache
 **/cache/*

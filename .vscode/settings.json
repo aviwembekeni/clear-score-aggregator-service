@@ -6,7 +6,14 @@
     "titleBar.inactiveForeground": "#15202b99",
     "statusBar.background": "#8080ff",
     "statusBarItem.hoverBackground": "#4d4dff",
-    "statusBar.foreground": "#15202b"
+    "statusBar.foreground": "#15202b",
+    "activityBar.activeBackground": "#b3b3ff",
+    "activityBar.activeBorder": "#ff0000",
+    "activityBar.background": "#b3b3ff",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#ff0000",
+    "activityBarBadge.foreground": "#e7e7e7"
   },
   "files.exclude": {
     "**/node_modules": true,
@@ -36,5 +43,6 @@
   "editor.renderControlCharacters": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "peacock.color": "#8080ff"
 }

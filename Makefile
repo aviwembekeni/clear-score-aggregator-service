@@ -38,34 +38,27 @@ help:
 	@echo " - Rebuild Docker Container          : make build"
 	@echo " - Rebuild & Start Docker Container  : make build up"
 
-set-credentials:
-	@echo "Validating the environment:"
-	@# HACK: This is needed for WSL on Windows 10, since WSL has no way to map ~/.aws into a docker container,
-	@#       as the ~ folder in WSL seems to be inaccessible to Docker for Windows
-	@# TODO: Find a better way.
-	@rsync -rup ~/.aws .
-
-up: set-credentials down docker-network-required
+up: down docker-network-required
 	@echo "Starting containers..."
 	@docker-compose up -d
 	@echo "Attachig shell..."
 	@docker-compose exec $(container) bash
 
-shell: set-credentials
+shell:
 	@echo "Attachig shell..."
 	@docker-compose exec $(container) bash
 
-down: set-credentials
+down:
 	@echo "Stopping containers..."
 	@docker-compose down
 
-build: set-credentials down
+build:  down
 	@echo "Stopping containers..."
 	@docker-compose down
 	@echo "Building containers..."
 	@docker-compose build
 
-create-docker-network: set-credentials
+create-docker-network:
 	@echo "Creating docker network..."
 	@docker network create clear-score
 
