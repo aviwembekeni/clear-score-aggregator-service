@@ -15,7 +15,7 @@ export default {
         const recommendedCreditCards = await creditCardService.getRecommendedCreditCards(args);
         return recommendedCreditCards;
       } catch (e) {
-        throw new Error(`An error occured while querying recommnded credit cards. ${e}`)
+        throw new Error(`An error occured while querying recommnded credit cards. ${e}`);
       }
     },
   },

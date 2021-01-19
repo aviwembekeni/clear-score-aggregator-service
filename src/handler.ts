@@ -1,10 +1,7 @@
 import 'source-map-support/register';
-
-import { ApolloError, ApolloServer } from 'apollo-server-lambda';
-
+import { ApolloServer, ApolloError } from 'apollo-server-lambda';
 import { Handler, APIGatewayEvent, Context } from 'aws-lambda';
-
-import SlowQueryLoggerPlugin from './functions/SlowQueryLoggerPlugin';
+// import { addSchemaLevelResolveFunction } from 'apollo-server';
 import schema from './schemas/Schema';
 
 // https://github.com/apollographql/apollo-server/issues/2156
@@ -18,7 +15,8 @@ function runApollo(event: APIGatewayEvent, lambdaContext: Context, handler: Hand
 }
 
 export const graphqlHandler: Handler = async (event: APIGatewayEvent, lambdaContext: Context): Promise<Handler> => {
-
+  // addSchemaLevelResolveFunction(schema, minimumVersionResolver);
+  console.debug(`graphqlHandler: creating apolloServer with executableSchema & invesContext`);
   const apolloServer = new ApolloServer({
     schema,
     tracing: true,
@@ -26,10 +24,9 @@ export const graphqlHandler: Handler = async (event: APIGatewayEvent, lambdaCont
       if (error.extensions) delete error.extensions.exception;
       return error as ApolloError;
     },
-    plugins: [SlowQueryLoggerPlugin],
   });
 
-  console.log('graphqlHandler: Creating handler');
+  console.info('graphqlHandler: Creating handler');
 
   const handler = apolloServer.createHandler({
     cors: {
@@ -40,7 +37,7 @@ export const graphqlHandler: Handler = async (event: APIGatewayEvent, lambdaCont
 
   lambdaContext.callbackWaitsForEmptyEventLoop = false;
 
-  console.log('graphqlHandler: end: returning handler');
+  console.info('graphqlHandler: end: returning handler');
 
   return await runApollo(event, lambdaContext, handler);
 };
