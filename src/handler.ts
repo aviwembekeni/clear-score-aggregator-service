@@ -5,7 +5,7 @@ import { ApolloError, ApolloServer } from 'apollo-server-lambda';
 import { Handler, APIGatewayEvent, Context } from 'aws-lambda';
 
 import SlowQueryLoggerPlugin from './functions/SlowQueryLoggerPlugin';
-import schema from './schemas/schema';
+import schema from './schemas/Schema';
 
 // https://github.com/apollographql/apollo-server/issues/2156
 function runApollo(event: APIGatewayEvent, lambdaContext: Context, handler: Handler): Promise<Handler> {
