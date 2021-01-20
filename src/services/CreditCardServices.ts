@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-import
- RecommendedCreditCardsInput from '../models/RecommendedCreditCardsInput.model';
+import RecommendedCreditCardsInput from '../models/RecommendedCreditCardsInput.model';
 import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResponse.model';
 import CSCardsApiResponse from '../models/CSCardsApiResponse.model';
 import ScoredCardsApiResponse from '../models/ScoredCardsApiResponse.model';
