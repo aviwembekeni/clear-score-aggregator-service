@@ -16,7 +16,7 @@ const typeDefs: DocumentNode = gql`
     cardScore: Float!
   }
 
-  extend type Query {
+  type Query {
     """
     ### Query recommended credit cards for  a user
     ~~~gql
