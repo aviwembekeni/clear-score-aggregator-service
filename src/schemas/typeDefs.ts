@@ -5,15 +5,15 @@ import { gql } from 'apollo-server-lambda';
 const typeDefs: DocumentNode = gql`
   input recommendedCreditCardsInput {
     name: String!
-    creditScore: Number!
-    salary: Number!
+    creditScore: Float!
+    salary: Float!
   }
 
   type ResommendedCrediCardsQueryResponse {
     provider: String!
     name: String!
-    apr: Number!
-    cardScore: Number!
+    apr: Float!
+    cardScore: Float!
   }
 
   extend type Query {
