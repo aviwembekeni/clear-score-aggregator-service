@@ -1,4 +1,3 @@
-
 export default interface RecommendedCreditCardsResponse {
   provider: string;
   name: string;
