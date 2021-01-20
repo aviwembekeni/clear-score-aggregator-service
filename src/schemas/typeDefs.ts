@@ -5,8 +5,8 @@ import { gql } from 'apollo-server-lambda';
 const typeDefs: DocumentNode = gql`
   input recommendedCreditCardsInput {
     name: String!
-    creditScore: Float!
-    salary: Float!
+    creditScore: Int!
+    salary: Int!
   }
 
   type ResommendedCrediCardsQueryResponse {
