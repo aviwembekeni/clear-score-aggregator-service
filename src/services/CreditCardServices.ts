@@ -5,6 +5,7 @@ import
 import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResponse.model';
 import CSCardsApiResponse from '../models/CSCardsApiResponse.model';
 import ScoredCardsApiResponse from '../models/ScoredCardsApiResponse.model';
+import { log } from 'console';
 
 class CreditCardServices {
   public constructor() {}
@@ -16,7 +17,9 @@ class CreditCardServices {
       const results = await Promise.all([this.getCSCards(name, creditScore), this.getScoredCards(name, creditScore, salary)]);
       const csCardsResponse = results[0];
       const scoredCardsResponse = results[1];
-
+      console.log(csCardsResponse);
+      console.log('----------------------------');
+      console.log(scoredCardsResponse);
       return;
     } catch (e) {
       throw new Error('Could not get recommended credit cards');
@@ -25,7 +28,13 @@ class CreditCardServices {
 
   private async getCSCards(name: string, creditScore: number): Promise<CSCardsApiResponse[]> {
     try {
-      const csCardsResponse: CSCardsApiResponse[] = await axios.post('https://app.clearscore.com/api/global/backend-tech-test/v1/cards/');
+      const csCardsResponse: CSCardsApiResponse[] = await axios.post(
+        'https://app.clearscore.com/api/global/backend-tech-test/v1/cards/',
+        {
+          name,
+          creditScore
+        }
+      );
       return csCardsResponse;
     } catch (e) {
       throw new Error(`Could not get cards from CSCards: ${e}`);
@@ -36,6 +45,11 @@ class CreditCardServices {
     try {
       const scoredCardsResponse: ScoredCardsApiResponse[] = await axios.post(
         'https://app.clearscore.com/api/global/backend-tech-test/v2/creditcards',
+        {
+          name,
+          score,
+          salary
+        }
       );
       return scoredCardsResponse;
     } catch (e) {
