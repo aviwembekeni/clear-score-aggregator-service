@@ -29,15 +29,17 @@ class CreditCardServices {
   private async getCSCards(name: string, creditScore: number): Promise<CSCardsApiResponse[]> {
     console.debug(`RecommendedCreditCards-->getCSCards: ${name}`);
     try {
-      const csCardsResponse: CSCardsApiResponse[] = await axios.post(
-        'https://app.clearscore.com/api/global/backend-tech-test/v1/cards/',
+      const csCardsResponse = await axios.post(
+        'https://app.clearscore.com/api/global/backend-tech-test/v1/creditcards',
         {
           name,
           creditScore
-        }
+        },
       );
+
+     const card: CSCardsApiResponse[] = csCardsResponse.data;
       console.log(csCardsResponse);
-      return csCardsResponse;
+      return card;
     } catch (e) {
       console.error(`Error at getCSCards: ${e.message}`, e);
       throw new Error(`Could not get cards from CSCards: ${e}`);
@@ -46,7 +48,7 @@ class CreditCardServices {
 
   private async getScoredCards(name: string, score: number, salary: number): Promise<ScoredCardsApiResponse[]> {
     try {
-      const scoredCardsResponse: ScoredCardsApiResponse[] = await axios.post(
+      const scoredCardsResponse = await axios.post(
         'https://app.clearscore.com/api/global/backend-tech-test/v2/creditcards',
         {
           name,
@@ -54,8 +56,9 @@ class CreditCardServices {
           salary
         }
       );
-      console.log(scoredCardsResponse);
-      return scoredCardsResponse;
+
+      const cards: ScoredCardsApiResponse[] = scoredCardsResponse.data;
+      return cards;
     } catch (e) {
       console.error(`Error at getScoredCards: ${e.message}`, e);
       // TODO: Create custom Error
