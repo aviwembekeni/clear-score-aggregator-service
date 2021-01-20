@@ -7,7 +7,7 @@ const resolvers = {
     helloWorld(): string {
       return 'Hello World ';
     },
-    async queryCreditCardRecommended(_obj: unknown, args: RecommendedCreditCardsInput): Promise<RecommendedCreditCardsResponse> {
+    async recommendedCreditCards(_obj: unknown, args: RecommendedCreditCardsInput): Promise<RecommendedCreditCardsResponse> {
       const creditCardService = new CreditCardServices();
       try {
         console.debug(`Resolving queryCreditCardRecommended for user: ${args.name}`);
