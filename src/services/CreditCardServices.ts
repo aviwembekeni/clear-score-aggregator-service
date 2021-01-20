@@ -10,7 +10,7 @@ class CreditCardServices {
   public constructor() {}
 
   public async getRecommendedCreditCards(args: RecommendedCreditCardsInput): Promise<RecommendedCreditCardsResponse> {
-    const { name, creditScore, salary } = args;
+    const { name, creditScore, salary } = args.input;
     try {
       console.debug(`RecommendedCreditCards-->Get: user: ${name}`);
       const results = await Promise.all([this.getCSCards(name, creditScore), this.getScoredCards(name, creditScore, salary)]);

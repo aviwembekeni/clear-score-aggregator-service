@@ -1,6 +1,8 @@
 
 export default interface RecommendedCreditCardsInput {
-  name: string;
-  creditScore: number;
-  salary: number;
+  input: {
+    name: string;
+    creditScore: number;
+    salary: number;
+  };
 }
