@@ -30,7 +30,7 @@ class CreditCardServices {
     console.debug(`RecommendedCreditCards-->getCSCards: ${name}`);
     try {
       const csCardsResponse = await axios.post(
-        'https://app.clearscore.com/api/global/backend-tech-test/v1/creditcards',
+        ' https://app.clearscore.com/api/global/backend-tech-test/v1/cards',
         {
           name,
           creditScore
