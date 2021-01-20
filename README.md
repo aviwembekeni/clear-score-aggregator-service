@@ -24,6 +24,8 @@ make down
 
 GraphQL Playground should now be running on: <http://localhost:4000/graphql>
 
+On the GraphQL Playground, click the settings icon and make sure that schema.polling.enable is set to false.
+
 Try a simple query like:
 
 ```gql
