@@ -5,7 +5,6 @@ import
 import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResponse.model';
 import CSCardsApiResponse from '../models/CSCardsApiResponse.model';
 import ScoredCardsApiResponse from '../models/ScoredCardsApiResponse.model';
-import { log } from 'console';
 
 class CreditCardServices {
   public constructor() {}

@@ -11,6 +11,7 @@ const resolvers = {
       const creditCardService = new CreditCardServices();
       try {
         console.debug(`Resolving queryCreditCardRecommended for user: ${args.name}`);
+        console.log(args);
         const recommendedCreditCards = await creditCardService.getRecommendedCreditCards(args);
         return recommendedCreditCards;
       } catch (e) {
