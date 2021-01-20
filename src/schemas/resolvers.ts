@@ -2,13 +2,12 @@ import RecommendedCreditCardsInput from '../models/RecommendedCreditCardsInput.m
 import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResponse.model';
 import CreditCardServices from '../services/CreditCardServices';
 
-export default {
+const resolvers = {
   Query: {
-    async queryCreditCardRecommended(
-      _obj: unknown,
-      args: RecommendedCreditCardsInput,
-      _context: any,
-    ): Promise<RecommendedCreditCardsResponse> {
+    helloWorld(): string {
+      return 'Hello World ';
+    },
+    async queryCreditCardRecommended(_obj: unknown, args: RecommendedCreditCardsInput): Promise<RecommendedCreditCardsResponse> {
       const creditCardService = new CreditCardServices();
       try {
         console.debug(`Resolving queryCreditCardRecommended for user: ${args.name}`);
@@ -19,15 +18,5 @@ export default {
       }
     },
   },
-
-  AppiaBaseResponse: {
-    __resolveType(): null {
-      return null;
-    },
-  },
-  Prices: {
-    __resolveType(): null {
-      return null;
-    },
-  },
 };
+export default resolvers;

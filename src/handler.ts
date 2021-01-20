@@ -1,43 +1,34 @@
+import { ApolloError, ApolloServer } from 'apollo-server-lambda';
+import { Handler } from 'aws-lambda';
 import 'source-map-support/register';
-import { ApolloServer, ApolloError } from 'apollo-server-lambda';
-import { Handler, APIGatewayEvent, Context } from 'aws-lambda';
-// import { addSchemaLevelResolveFunction } from 'apollo-server';
-import schema from './schemas/Schema';
+import { IResolvers } from 'graphql-tools';
+import resolvers from './schemas/resolvers';
+import typeDefs from './schemas/typeDefs';
 
-// https://github.com/apollographql/apollo-server/issues/2156
-function runApollo(event: APIGatewayEvent, lambdaContext: Context, handler: Handler): Promise<Handler> {
-  return new Promise((resolve, reject) => {
-    // silly callback trick needs type any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const callback = (error: any, body: any): void => (error ? reject(error) : resolve(body));
-    handler(event, lambdaContext, callback);
-  });
-}
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers: resolvers as IResolvers,
+  tracing: true,
+  formatError: (error): ApolloError => {
+    if (error.extensions) delete error.extensions.exception;
+    return error as ApolloError;
+  },
+  // context: async ({ event, context }): Promise<ContextOptions> => ({
+  //   event,
+  //   context,
+  // }),
+});
 
-export const graphqlHandler: Handler = async (event: APIGatewayEvent, lambdaContext: Context): Promise<Handler> => {
-  // addSchemaLevelResolveFunction(schema, minimumVersionResolver);
-  console.debug(`graphqlHandler: creating apolloServer with executableSchema & invesContext`);
-  const apolloServer = new ApolloServer({
-    schema,
-    tracing: true,
-    formatError: (error): ApolloError => {
-      if (error.extensions) delete error.extensions.exception;
-      return error as ApolloError;
-    },
-  });
-
-  console.info('graphqlHandler: Creating handler');
-
+export const graphqlHandler: Handler = (event, context, callback): void => {
+  console.debug('Creating Apollo Server...');
   const handler = apolloServer.createHandler({
     cors: {
       origin: process.env.CORS_ORIGIN,
       credentials: true,
     },
   });
+  console.debug('Created Apollo Server...');
 
-  lambdaContext.callbackWaitsForEmptyEventLoop = false;
-
-  console.info('graphqlHandler: end: returning handler');
-
-  return await runApollo(event, lambdaContext, handler);
+  context.callbackWaitsForEmptyEventLoop = false;
+  return handler(event, context, callback);
 };

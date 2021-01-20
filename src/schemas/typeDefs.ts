@@ -3,9 +3,7 @@ import { DocumentNode } from 'graphql';
 import { gql } from 'apollo-server-lambda';
 
 const typeDefs: DocumentNode = gql`
-  directive @isAuthUser on FIELD_DEFINITION | OBJECT
-
-input recommendedCreditCardsInput {
+  input recommendedCreditCardsInput {
     name: String!
     creditScore: Number!
     salary: Number!
@@ -37,7 +35,6 @@ input recommendedCreditCardsInput {
     ~~~
     """
     recommendedCreditCards(input: recommndedCreditCardsInput): ResommendedCrediCardsQueryResponse
-    """
   }
 `;
 
