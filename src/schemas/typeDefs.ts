@@ -17,6 +17,7 @@ const typeDefs: DocumentNode = gql`
   }
 
   type Query {
+    helloWorld: String!
     """
     ### Query recommended credit cards for  a user
     ~~~gql
