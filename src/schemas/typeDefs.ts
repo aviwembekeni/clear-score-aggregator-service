@@ -34,7 +34,7 @@ const typeDefs: DocumentNode = gql`
     }
     ~~~
     """
-    recommendedCreditCards(input: recommndedCreditCardsInput): ResommendedCrediCardsQueryResponse
+    recommendedCreditCards(input: recommendedCreditCardsInput): ResommendedCrediCardsQueryResponse
   }
 `;
 
