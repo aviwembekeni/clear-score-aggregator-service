@@ -22,7 +22,9 @@ const typeDefs: DocumentNode = gql`
     ### Query recommended credit cards for  a user
     ~~~gql
     {
-      recommendedCreditCards(name: "John Smith", creditScore: 500, salary: 20000) {
+      recommendedCreditCards(
+        input: { name: "John Smith", creditScore: 500, salary: 20000 }
+      ) {
         ...recommendedCrediCardsResponse
       }
     }

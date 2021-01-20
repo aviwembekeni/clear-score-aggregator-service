@@ -30,14 +30,16 @@ Try a simple query like:
 
 ```gql
 {
-  recommendedCreditCards(name: "John Smith", creditScore: 500, salary: 20000) {
-    creditCards {
-      provider
-      name
-      apr
-      cardScore
-    }
+  recommendedCreditCards(input: { name: "John Smith", creditScore: 500, salary: 20000 }) {
+    ...recommendedCrediCardsResponse
   }
+}
+
+fragment recommendedCrediCardsResponse on ResommendedCrediCardsQueryResponse {
+  provider
+  name
+  apr
+  cardScore
 }
 ```
 
