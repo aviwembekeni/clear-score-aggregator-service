@@ -18,7 +18,7 @@ class CreditCardServices {
       const recommendedCreditCardsResponse: RecommendedCreditCardsResponse[] = [];
       csCardsResponse.forEach(item => {
         const csCreditCard: RecommendedCreditCardsResponse = {
-          provider: 'CSCards',
+          provider: PartnerName.CSCards,
           name: item.cardName,
           apr: item.apr,
           cardScore: item.eligibility / item.apr ** 2,
@@ -28,7 +28,7 @@ class CreditCardServices {
 
       scoredCardsResponse.forEach(item => {
         const scoredCreditCard: RecommendedCreditCardsResponse = {
-          provider: 'ScoredCards',
+          provider: PartnerName.ScoredCards,
           name: item.card,
           apr: item.apr,
           cardScore: item.approvalRating / item.apr ** 2,
@@ -74,6 +74,11 @@ class CreditCardServices {
       throw new Error(`Could not get cards from ScoredCards: ${e}`);
     }
   }
+}
+
+enum PartnerName {
+  CSCards = 'CSCards',
+  ScoredCards = 'ScoredCards',
 }
 
 export default CreditCardServices;
