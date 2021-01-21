@@ -17,13 +17,23 @@ class CreditCardServices {
       const scoredCardsResponse = results[1];
       const recommendedCreditCardsResponse: RecommendedCreditCardsResponse[] = [];
       csCardsResponse.forEach(item => {
-        const creditCard: RecommendedCreditCardsResponse = {
+        const csCreditCard: RecommendedCreditCardsResponse = {
           provider: 'CSCards',
           name: item.cardName,
           apr: item.apr,
           cardScore: item.eligibility / item.apr ** 2,
         };
-        recommendedCreditCardsResponse.push(creditCard);
+        recommendedCreditCardsResponse.push(csCreditCard);
+      });
+
+      scoredCardsResponse.forEach(item => {
+        const scoredCreditCard: RecommendedCreditCardsResponse = {
+          provider: 'ScoredCards',
+          name: item.name,
+          apr: item.approvalRating,
+          cardScore: item.score / item.approvalRating ** 2,
+        };
+        recommendedCreditCardsResponse.push(scoredCreditCard);
       });
       return recommendedCreditCardsResponse;
     } catch (e) {
