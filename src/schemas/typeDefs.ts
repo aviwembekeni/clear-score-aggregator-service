@@ -9,7 +9,7 @@ const typeDefs: DocumentNode = gql`
     salary: Int!
   }
 
-  type ResommendedCrediCardsQueryResponse {
+  type RecommendedCrediCardsQueryResponse {
     provider: String!
     name: String!
     apr: Float!
@@ -29,7 +29,7 @@ const typeDefs: DocumentNode = gql`
       }
     }
 
-    fragment recommendedCrediCardsResponse on ResommendedCrediCardsQueryResponse {
+    fragment recommendedCrediCardsResponse on RecommendedCrediCardsQueryResponse {
       provider
       name
       apr
@@ -37,7 +37,7 @@ const typeDefs: DocumentNode = gql`
     }
     ~~~
     """
-    recommendedCreditCards(input: recommendedCreditCardsInput): ResommendedCrediCardsQueryResponse
+    recommendedCreditCards(input: recommendedCreditCardsInput): [RecommendedCrediCardsQueryResponse]
   }
 `;
 
