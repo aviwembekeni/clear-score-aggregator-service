@@ -35,7 +35,7 @@ Try a simple query like:
   }
 }
 
-fragment recommendedCrediCardsResponse on ResommendedCrediCardsQueryResponse {
+fragment recommendedCrediCardsResponse on RecommendedCrediCardsQueryResponse {
   provider
   name
   apr
