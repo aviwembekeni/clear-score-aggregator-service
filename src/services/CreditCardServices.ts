@@ -13,7 +13,6 @@ class CreditCardServices {
     try {
       console.debug(`RecommendedCreditCards-->getRecommendedCreditCards: ${name}`);
       const results = await Promise.all([this.getCSCards(name, creditScore), this.getScoredCards(name, creditScore, salary)]);
-      console.log(results);
       const csCardsResponse = results[0];
       const scoredCardsResponse = results[1];
       const recommendedCreditCardsResponse: RecommendedCreditCardsResponse[] = [];

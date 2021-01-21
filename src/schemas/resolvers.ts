@@ -12,6 +12,7 @@ const resolvers = {
       try {
         console.debug(`Resolving queryCreditCardRecommended for user: ${args.input.name}`);
         const recommendedCreditCards = await creditCardService.getRecommendedCreditCards(args);
+        console.log(recommendedCreditCards);
         return recommendedCreditCards;
       } catch (e) {
         throw new Error(`An error occured while querying recommnded credit cards. ${e}`);
