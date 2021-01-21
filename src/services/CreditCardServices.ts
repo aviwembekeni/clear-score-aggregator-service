@@ -29,9 +29,9 @@ class CreditCardServices {
       scoredCardsResponse.forEach(item => {
         const scoredCreditCard: RecommendedCreditCardsResponse = {
           provider: 'ScoredCards',
-          name: item.name,
-          apr: item.approvalRating,
-          cardScore: item.score / item.approvalRating ** 2,
+          name: item.card,
+          apr: item.apr,
+          cardScore: item.approvalRating / item.apr ** 2,
         };
         recommendedCreditCardsResponse.push(scoredCreditCard);
       });

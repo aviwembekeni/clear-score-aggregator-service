@@ -1,5 +1,5 @@
 export default interface ScoredCardsApiResponse {
-  name: string;
-  score: number;
+  card: string;
+  apr: number;
   approvalRating: number;
 }
