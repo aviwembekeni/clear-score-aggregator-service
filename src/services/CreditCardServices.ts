@@ -5,6 +5,7 @@ import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResp
 import CSCardsApiResponse from '../models/CSCardsApiResponse.model';
 import ScoredCardsApiResponse from '../models/ScoredCardsApiResponse.model';
 import standardizeDifferentScales from '../functions/standardizeDifferentScales';
+import sortCardDesc from '../functions/sortCardsDesc';
 
 class CreditCardServices {
   // public constructor() {}
@@ -36,7 +37,7 @@ class CreditCardServices {
         };
         recommendedCreditCardsResponse.push(scoredCreditCard);
       });
-      return recommendedCreditCardsResponse;
+      return sortCardDesc(recommendedCreditCardsResponse);
     } catch (e) {
       console.error(`Error at getRecommendedCreditCards: ${e.message}`, e);
       throw new Error('Could not get recommended credit cards');
