@@ -8,7 +8,7 @@ const SlowQueryLoggerPlugin = {
     const query = requestContext.request.query;
     const start = new Date().getTime();
 
-    console.log('GraphQL Request: START', { query });
+    console.debug('GraphQL Request: START', { query });
 
     return {
       willSendResponse(): void {
@@ -18,7 +18,7 @@ const SlowQueryLoggerPlugin = {
         } else if (elapsed > slowQueryThreshold) {
           console.warn(`GraphQL Request: SLOW ${elapsed}ms`, { query, elapsed });
         }
-        console.log('GraphQL Request: END', { query });
+        console.debug('GraphQL Request: END', { query });
       },
     };
   },
