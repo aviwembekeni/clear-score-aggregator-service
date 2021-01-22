@@ -34,7 +34,7 @@ describe('Testing sort cards in descending order function', (): void => {
       provider: 'CSCards',
       name: 'SuperSaver Card',
       apr: 21.4,
-      cardScore: 0.013756659970303085,
+      cardScore: 0.013756659970303084,
     },
     {
       provider: 'CSCards',
