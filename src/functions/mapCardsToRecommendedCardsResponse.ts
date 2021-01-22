@@ -9,15 +9,16 @@ export default (
   provider: string,
 ): RecommendedCreditCardsResponse[] => {
   const cards: RecommendedCreditCardsResponse[] = [];
-  partnerCardResponse.forEach(card => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  partnerCardResponse.forEach((card: any) => {
     cards.push({
       provider: provider,
       name: provider == PartnerName.CSCards ? PartnerName.CSCards : PartnerName.ScoredCards,
       apr: card.apr,
       cardScore:
         provider == PartnerName.CSCards
-          ? card.eligibility / card.apr ** 2
-          : standardizeDifferentScales(card.approvalRating, 0.0, 1.0, 10.0) / card.apr ** 2,
+          ? card?.eligibility / card.apr ** 2
+          : standardizeDifferentScales(card?.approvalRating, 0.0, 1.0, 10.0) / card.apr ** 2,
     });
   });
   return cards;
