@@ -18,7 +18,7 @@ export default (
       cardScore:
         provider == PartnerName.CSCards
           ? card?.eligibility / card.apr ** 2
-          : standardizeDifferentScales(card?.approvalRating, 0.0, 1.0, 10.0) / card.apr ** 2,
+          : standardizeDifferentScales(card?.approvalRating, 0.0, 1.0, 100) / card.apr ** 2,
     });
   });
   return cards;
