@@ -7,19 +7,19 @@ describe('Testing sort cards in descending order function', (): void => {
       provider: 'CSCards',
       name: 'SuperSaver Card',
       apr: 21.4,
-      cardScore: 0.013756659970303085,
+      cardScore: 0.138,
     },
     {
       provider: 'CSCards',
       name: 'SuperSpender Card',
       apr: 19.2,
-      cardScore: 0.013563368055555556,
+      cardScore: 0.136,
     },
     {
       provider: 'ScoredCards',
       name: 'ScoredCard Builder',
       apr: 19.4,
-      cardScore: 0.021256244021681373,
+      cardScore: 0.213,
     },
   ];
 
@@ -28,19 +28,19 @@ describe('Testing sort cards in descending order function', (): void => {
       provider: 'ScoredCards',
       name: 'ScoredCard Builder',
       apr: 19.4,
-      cardScore: 0.021256244021681373,
+      cardScore: 0.213,
     },
     {
       provider: 'CSCards',
       name: 'SuperSaver Card',
       apr: 21.4,
-      cardScore: 0.013756659970303084,
+      cardScore: 0.138,
     },
     {
       provider: 'CSCards',
       name: 'SuperSpender Card',
       apr: 19.2,
-      cardScore: 0.013563368055555556,
+      cardScore: 0.136,
     },
   ];
 
