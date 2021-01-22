@@ -19,7 +19,7 @@ describe('Testing map cards to recommended cards response function', (): void =>
         provider: PartnerName.ScoredCards,
         name: 'ScoredCard Builder',
         apr: 19.4,
-        cardScore: 0.21256244021681373,
+        cardScore: 0.212,
       },
     ];
     expect(mapCardsToRecommendedCardsResponse(scoredCardsResponse, PartnerName.ScoredCards)).toEqual(recommendedCreditCardApiResponse);
@@ -44,13 +44,13 @@ describe('Testing map cards to recommended cards response function', (): void =>
         provider: 'CSCards',
         name: 'SuperSaver Card',
         apr: 21.4,
-        cardScore: 0.13756659970303085,
+        cardScore: 0.137,
       },
       {
         provider: 'CSCards',
         name: 'SuperSpender Card',
         apr: 19.2,
-        cardScore: 0.13563368055555556,
+        cardScore: 0.135,
       },
     ];
     expect(mapCardsToRecommendedCardsResponse(csCardsResponse, PartnerName.CSCards)).toEqual(recommendedCreditCardApiResponse);
