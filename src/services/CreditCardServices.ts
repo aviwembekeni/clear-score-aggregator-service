@@ -4,6 +4,7 @@ import RecommendedCreditCardsInput from '../models/RecommendedCreditCardsInput.m
 import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResponse.model';
 import CSCardsApiResponse from '../models/CSCardsApiResponse.model';
 import ScoredCardsApiResponse from '../models/ScoredCardsApiResponse.model';
+import standardizeDifferentScales from '../functions/standardizeDifferentScales';
 
 class CreditCardServices {
   // public constructor() {}
@@ -31,7 +32,7 @@ class CreditCardServices {
           provider: PartnerName.ScoredCards,
           name: item.card,
           apr: item.apr,
-          cardScore: item.approvalRating / item.apr ** 2,
+          cardScore: standardizeDifferentScales(item.approvalRating, 0.0, 1.0, 10) / item.apr ** 2,
         };
         recommendedCreditCardsResponse.push(scoredCreditCard);
       });
