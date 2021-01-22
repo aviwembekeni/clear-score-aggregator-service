@@ -13,7 +13,7 @@ export default (
   partnerCardResponse.forEach((card: any) => {
     cards.push({
       provider: provider,
-      name: provider == PartnerName.CSCards ? PartnerName.CSCards : PartnerName.ScoredCards,
+      name: provider == PartnerName.CSCards ? card.cardName : card.card,
       apr: card.apr,
       cardScore:
         provider == PartnerName.CSCards
