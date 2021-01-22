@@ -4,8 +4,8 @@ import RecommendedCreditCardsInput from '../models/RecommendedCreditCardsInput.m
 import RecommendedCreditCardsResponse from '../models/RecommendedCreditCardsResponse.model';
 import CSCardsApiResponse from '../models/CSCardsApiResponse.model';
 import ScoredCardsApiResponse from '../models/ScoredCardsApiResponse.model';
-import standardizeDifferentScales from '../functions/standardizeDifferentScales';
 import sortCardDesc from '../functions/sortCardsDesc';
+import mapCardsToRecommendedCardsResponse from '../functions/mapCardsToRecommendedCardsResponse';
 
 class CreditCardServices {
   // public constructor() {}
@@ -14,29 +14,13 @@ class CreditCardServices {
     const { name, creditScore, salary } = args.input;
     try {
       console.debug(`RecommendedCreditCards-->getRecommendedCreditCards: ${name}`);
+
       const results = await Promise.all([this.getCSCards(name, creditScore), this.getScoredCards(name, creditScore, salary)]);
       const csCardsResponse = results[0];
       const scoredCardsResponse = results[1];
-      const recommendedCreditCardsResponse: RecommendedCreditCardsResponse[] = [];
-      csCardsResponse.forEach(item => {
-        const csCreditCard: RecommendedCreditCardsResponse = {
-          provider: PartnerName.CSCards,
-          name: item.cardName,
-          apr: item.apr,
-          cardScore: item.eligibility / item.apr ** 2,
-        };
-        recommendedCreditCardsResponse.push(csCreditCard);
-      });
-
-      scoredCardsResponse.forEach(item => {
-        const scoredCreditCard: RecommendedCreditCardsResponse = {
-          provider: PartnerName.ScoredCards,
-          name: item.card,
-          apr: item.apr,
-          cardScore: standardizeDifferentScales(item.approvalRating, 0.0, 1.0, 10) / item.apr ** 2,
-        };
-        recommendedCreditCardsResponse.push(scoredCreditCard);
-      });
+      const mappedCSCards = mapCardsToRecommendedCardsResponse(csCardsResponse, PartnerName.CSCards);
+      const mappedScoredCards = mapCardsToRecommendedCardsResponse(scoredCardsResponse, PartnerName.ScoredCards);
+      const recommendedCreditCardsResponse: RecommendedCreditCardsResponse[] = mappedCSCards.concat(mappedScoredCards);
       return sortCardDesc(recommendedCreditCardsResponse);
     } catch (e) {
       console.error(`Error at getRecommendedCreditCards: ${e.message}`, e);
@@ -78,7 +62,7 @@ class CreditCardServices {
   }
 }
 
-enum PartnerName {
+export enum PartnerName {
   CSCards = 'CSCards',
   ScoredCards = 'ScoredCards',
 }
