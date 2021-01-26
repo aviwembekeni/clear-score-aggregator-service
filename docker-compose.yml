@@ -7,7 +7,7 @@ services:
       args:
         PROJECT: ${PROJECT}
     ports:
-      - '${process.env.HTTP_PORT}'
+      - '4000:4000'
     volumes:
       - './.aws:/root/.aws'
       - '.:/${PROJECT}'
