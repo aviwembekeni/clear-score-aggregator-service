@@ -31,7 +31,7 @@ class CreditCardServices {
   private async getCSCards(name: string, creditScore: number): Promise<CSCardsApiResponse[]> {
     console.debug(`RecommendedCreditCards-->getCSCards: ${name}`);
     try {
-      const csCardsResponse = await axios.post(' https://app.clearscore.com/api/global/backend-tech-test/v1/cards', {
+      const csCardsResponse = await axios.post(process.env.CSCARDS_ENDPOINT as string, {
         name,
         creditScore,
       });
@@ -46,7 +46,7 @@ class CreditCardServices {
 
   private async getScoredCards(name: string, score: number, salary: number): Promise<ScoredCardsApiResponse[]> {
     try {
-      const scoredCardsResponse = await axios.post('https://app.clearscore.com/api/global/backend-tech-test/v2/creditcards', {
+      const scoredCardsResponse = await axios.post(process.env.SCOREDCARDS_ENDPOINT as string, {
         name,
         score,
         salary,

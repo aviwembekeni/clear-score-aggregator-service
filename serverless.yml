@@ -50,7 +50,7 @@ custom:
       prod: 'This is prod'
       dev: 'This is dev'
   serverless-offline:
-    port: 4000
+    port: ${process.env.HTTP_PORT}
     host: 0.0.0.0
   cache:
     maxAgeInSeconds:
@@ -61,8 +61,6 @@ custom:
       local: 180
       dev: 86400
       prod: 172800
-  cors-origin:
-    local: http://localhost:3002
   customDomain:
     domainName: ${self:custom.shortname}.${self:custom.stage}.clear.score
     certificateName: ${self:custom.shortname}.${self:custom.stage}.clear.score
