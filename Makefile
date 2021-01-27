@@ -42,7 +42,7 @@ up: down docker-network-required
 	@echo "Starting containers..."
 	@docker-compose up -d
 	@echo "Attachig shell..."
-	@docker-compose exec $(container) bash
+	@docker-compose exec $(container) make run
 
 shell:
 	@echo "Attachig shell..."
