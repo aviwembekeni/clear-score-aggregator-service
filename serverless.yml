@@ -27,6 +27,8 @@ provider:
     IOS_MINIMUM_VERSION: '2.0.0'
     ANDROID_MINIMUM_VERSION: '2.0.0'
     SLOW_QUERY_THRESHOLD: ${self:custom.slowQueryThreshold.${self:custom.stage}}
+    CSCARDS_ENDPOINT: ${env:CSCARDS_ENDPOINT}
+    SCOREDCARDS_ENDPOINT: ${env:SCOREDCARDS_ENDPOINT}
 
 package:
   exclude:
@@ -50,7 +52,7 @@ custom:
       prod: 'This is prod'
       dev: 'This is dev'
   serverless-offline:
-    port: ${process.env.HTTP_PORT}
+    port: 4000
     host: 0.0.0.0
   cache:
     maxAgeInSeconds:
@@ -61,6 +63,8 @@ custom:
       local: 180
       dev: 86400
       prod: 172800
+  cors-origin:
+    local: http://localhost:3002
   customDomain:
     domainName: ${self:custom.shortname}.${self:custom.stage}.clear.score
     certificateName: ${self:custom.shortname}.${self:custom.stage}.clear.score

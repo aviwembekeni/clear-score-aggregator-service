@@ -7,13 +7,15 @@ services:
       args:
         PROJECT: ${PROJECT}
     ports:
-      - '4000:4000'
+      - '${HTTP_PORT}:4000'
     volumes:
       - './.aws:/root/.aws'
       - '.:/${PROJECT}'
       - '/${PROJECT}/node_modules'
     environment:
       - AWS_PROFILE=clear-score
+      - CSCARDS_ENDPOINT=${CSCARDS_ENDPOINT}
+      - SCOREDCARDS_ENDPOINT=${SCOREDCARDS_ENDPOINT}
     entrypoint: top
     networks:
       - local
@@ -25,3 +27,4 @@ networks:
   clear-score:
     name: clear-score
     external: true
+s
